@@ -1,9 +1,10 @@
-var caseTaille = 40;
+var caseTaille = 50;
+var offset = 40;
 var bob = new Peon();
 
 var labyrinte = [
 	[
-		[1,0,1,0],
+		[1,0,1,2],
 		[1,0,1,0],
 		[1,0,0,0],
 		[1,1,0,0]
@@ -19,7 +20,7 @@ var labyrinte = [
 		[0,1,0,0],
 	],[
 		[0,0,1,1],
-		[1,1,0,0],
+		[1,1,2,0],
 		[1,0,1,1],
 		[0,1,1,0],
 	]
@@ -33,8 +34,7 @@ function draw() {
 
 	background(25);
 
-	translate(30,30);
-
+	translate(offset,offset);
 	for(var y=0; y < labyrinte.length; y++) {
 		for(var x=0; x < labyrinte[y].length; x++) {
 			for(var i=0; i < labyrinte[y][x].length; i++) {
@@ -44,16 +44,26 @@ function draw() {
 			}
 		}
 	}
+	bob.update();
+	bob.display();
 
-	peon.update();
-	peon.display();
+}
 
+function mousePressed() {
+	console.log(mouseX);
+	bob.detectClick();
+	return false;
 }
 
 function drawLine(position,x,y,color) {
 	if(color==1) {
+		strokeWeight(2);
 		stroke(255,255,255,255);
+	} else if(color==2) {
+		strokeWeight(1);
+		stroke(255,0,0,255);
 	} else {
+		strokeWeight(1);
 		stroke(255,255,255,50);
 	}
 	switch (position) {
@@ -74,21 +84,4 @@ function drawLine(position,x,y,color) {
 			line(x*caseTaille, y*caseTaille, x*caseTaille, y*caseTaille+caseTaille);
 		break;
 	}
-}
-
-function Peon() {
-
-	this.x = 15;
-	this.y = 15;
-	this.sexe = 'male';
-
-	this.update = function() {
-
-	};
-
-	this.display = function() {
-		rect(x,y,30,30);
-		
-	};
-
 }
