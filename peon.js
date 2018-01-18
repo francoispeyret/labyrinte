@@ -15,13 +15,13 @@ function Peon() {
 	this.update = function() {
         if(this.etat=='move') {
             if(this.y > this.nextY){
-                this.y--;
+                this.y = this.y-2;
             } else if(this.x < this.nextX) {
-                this.x++;
+                this.x = this.x+2;
             } else if(this.y < this.nextY) {
-                this.y++;
+                this.y = this.y+2;
             } else if(this.x > this.nextX) {
-                this.x--;
+                this.x = this.x-2;
             } else {
                 this.etat='static';
             }
@@ -34,6 +34,8 @@ function Peon() {
         push();
         rectMode(CENTER);
 		rect(this.x+caseTaille/2,this.y+caseTaille/2,this.w,this.w);
+		imageMode(CENTER);
+		image(cache, this.x+caseTaille/2,this.y+caseTaille/2);
         pop();
         fill(255,0,0,150);
         // haut
@@ -117,7 +119,6 @@ function Peon() {
     this.detectWall = function(direction) {
         var destination = labyrinte[this.caseY][this.caseX];
         var result = destination[direction];
-        console.log(result);
         return result;
     }
 
