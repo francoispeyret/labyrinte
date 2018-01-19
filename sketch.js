@@ -7,62 +7,11 @@ function preload() {
   cache = loadImage('cache.png');
 }
 
-var labyrinte = [
-	[
-		[1,0,1,2],
-		[1,0,1,0],
-		[1,0,0,0],
-		[1,0,0,0],
-		[1,0,0,0],
-		[1,0,0,0],
-		[1,0,0,0],
-		[1,0,0,0],
-		[1,0,0,0],
-		[1,0,0,0],
-		[1,1,0,0]
-	],[
-		[1,0,0,1],
-		[1,1,0,0],
-		[0,1,0,1],
-		[1,1,0,1],
-		[0,1,0,1],
-		[1,0,0,0],
-		[1,0,1,0],
-		[1,0,0,0],
-		[1,0,0,1],
-		[1,0,1,0],
-		[0,1,1,0],
-	],[
-		[0,1,0,1],
-		[0,0,1,1],
-		[0,0,1,0],
-		[0,1,0,0],
-		[0,1,0,1],
-		[0,1,0,0],
-		[1,1,0,1],
-		[0,1,1,0],
-		[0,0,1,0],
-		[1,1,1,0],
-		[1,2,0,0],
-	],[
-		[0,0,1,1],
-		[1,1,0,0],
-		[1,0,1,1],
-		[0,1,1,0],
-		[0,0,1,1],
-		[0,0,1,0],
-		[0,0,1,0],
-		[0,0,1,0],
-		[0,0,1,0],
-		[0,0,1,0],
-		[0,1,1,0],
-	]
-];
 
-var labyrintheNew = [
-	['k','b','b','b','b','h'],
-	['e','c','e','a','a','h'],
-	['j','i','d','d','d','i']
+var labyrinthe = [
+	['k','b','b','b','f','b','b','b','b','h'],
+	['e','h','e','m','b','h'],
+	['j','g','d','d','d','g']
 ];
 
 var correspondance = {
@@ -105,11 +54,11 @@ function draw() {
 	// 		}
 	// 	}
 	// }
-	for(var y=0; y < labyrintheNew.length; y++) {
-		for(var x=0; x < labyrintheNew[y].length; x++) {
+	for(var y=0; y < labyrinthe.length; y++) {
+		for(var x=0; x < labyrinthe[y].length; x++) {
 			stroke(255);
 			noFill();
-			drawLineNew(labyrintheNew[y][x],x,y);
+			drawLineNew(labyrinthe[y][x],x,y);
 		}
 	}
 	bob.update();
@@ -139,7 +88,7 @@ function drawLineNew(type,x,y) {
 	stroke(255,255,255,50);
 
 	// bas
-	if(type=='d' || type=='f' || type=='i' || type=='j' || type=='l' || type=='m' || type=='n' || type=='o') {
+	if(type=='d' || type=='f' || type=='i' || type=='j' || type=='l' || type=='m' || type=='o') {
 		stroke(255,255,255,255);
 	}
 	line(x*caseTaille+caseTaille, y*caseTaille+caseTaille, x*caseTaille, y*caseTaille+caseTaille);

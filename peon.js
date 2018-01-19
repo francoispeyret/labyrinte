@@ -35,7 +35,7 @@ function Peon() {
         rectMode(CENTER);
 		rect(this.x+caseTaille/2,this.y+caseTaille/2,this.w,this.w);
 		imageMode(CENTER);
-		image(cache, this.x+caseTaille/2,this.y+caseTaille/2);
+		//image(cache, this.x+caseTaille/2,this.y+caseTaille/2);
         pop();
         fill(255,0,0,150);
         // haut
@@ -93,7 +93,7 @@ function Peon() {
     };
 
     this.move = function(direction) {
-        if(this.detectWall(direction)) {
+        if(this.detectWall(direction)==0) {
             this.etat = 'move';
             switch (direction) {
                 case 0:
@@ -117,58 +117,8 @@ function Peon() {
     };
 
     this.detectWall = function(direction) {
-
-		var destination = labyrinte[this.caseY][this.caseX];
-		var result = destination[direction];
-		return result;
-
-
-		/*var position = labyrintheNew[this.caseY][this.caseX];
-        var destination;
-
-		switch (direction) {
-			case 0:
-			    if(labyrintheNew[this.caseY-1] != null)
-                    destination = labyrintheNew[this.caseY-1][this.caseX];
-			    else
-			        return false;
-				break;
-			case 1:
-				if(labyrintheNew[this.caseY][this.caseX+1]!=null)
-					destination = labyrintheNew[this.caseY][this.caseX+1];
-				else
-					return false;
-				break;
-			case 2:
-				if(labyrintheNew[this.caseY+1]!=null)
-					destination = labyrintheNew[this.caseY+1][this.caseX];
-				else
-					return false;
-				break;
-			case 3:
-				if(labyrintheNew[this.caseY][this.caseX-1]!=null)
-					destination = labyrintheNew[this.caseY][this.caseX-1];
-				else
-					return false;
-				break;
-		}
-		if(destination!==null) {
-			switch (direction) {
-				case 0:
-					if(destination)
-					break;
-				case 1:
-					destination = labyrintheNew[this.caseY][this.caseX+1];
-					break;
-				case 2:
-					destination = labyrintheNew[this.caseY+1][this.caseX];
-					break;
-				case 3:
-					destination = labyrintheNew[this.caseY][this.caseX-1];
-					break;
-			}
-        }
-        return false;*/
+		var destination = labyrinthe[this.caseY][this.caseX];
+		return correspondance[destination][direction];
     }
 
 }
