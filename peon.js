@@ -56,19 +56,19 @@ function Peon() {
 	};
 
     this.detectClick = function() {
-
+        var infiniti = 800;
         // haut
         if(
             mouseX > this.x + offset &&
             mouseX < this.x + caseTaille + offset &&
             mouseY < this.y + offset &&
-            mouseY > this.y - caseTaille + offset) {
+            mouseY > this.y - infiniti + offset) {
             this.move(0);
         }
         // droite
         if(
             mouseX > this.x + caseTaille + offset &&
-            mouseX < this.x + caseTaille + caseTaille + offset &&
+            mouseX < this.x + caseTaille + infiniti + offset &&
             mouseY > this.y + offset &&
             mouseY < this.y + caseTaille + offset) {
             this.move(1);
@@ -78,13 +78,13 @@ function Peon() {
             mouseX > this.x + offset &&
             mouseX < this.x + caseTaille + offset &&
             mouseY > this.y + caseTaille + offset &&
-            mouseY < this.y + caseTaille + caseTaille + offset) {
+            mouseY < this.y + caseTaille + infiniti + offset) {
             this.move(2);
         }
         // gauche
         if(
             mouseX < this.x + offset &&
-            mouseX > this.x - caseTaille + offset &&
+            mouseX > this.x - infiniti + offset &&
             mouseY > this.y + offset &&
             mouseY < this.y + caseTaille + offset) {
             this.move(3);
@@ -93,7 +93,7 @@ function Peon() {
     };
 
     this.move = function(direction) {
-        if(this.detectWall(direction)==0) {
+        if(this.detectWall(direction)) {
             this.etat = 'move';
             switch (direction) {
                 case 0:
@@ -117,9 +117,58 @@ function Peon() {
     };
 
     this.detectWall = function(direction) {
-        var destination = labyrinte[this.caseY][this.caseX];
-        var result = destination[direction];
-        return result;
+
+		var destination = labyrinte[this.caseY][this.caseX];
+		var result = destination[direction];
+		return result;
+
+
+		/*var position = labyrintheNew[this.caseY][this.caseX];
+        var destination;
+
+		switch (direction) {
+			case 0:
+			    if(labyrintheNew[this.caseY-1] != null)
+                    destination = labyrintheNew[this.caseY-1][this.caseX];
+			    else
+			        return false;
+				break;
+			case 1:
+				if(labyrintheNew[this.caseY][this.caseX+1]!=null)
+					destination = labyrintheNew[this.caseY][this.caseX+1];
+				else
+					return false;
+				break;
+			case 2:
+				if(labyrintheNew[this.caseY+1]!=null)
+					destination = labyrintheNew[this.caseY+1][this.caseX];
+				else
+					return false;
+				break;
+			case 3:
+				if(labyrintheNew[this.caseY][this.caseX-1]!=null)
+					destination = labyrintheNew[this.caseY][this.caseX-1];
+				else
+					return false;
+				break;
+		}
+		if(destination!==null) {
+			switch (direction) {
+				case 0:
+					if(destination)
+					break;
+				case 1:
+					destination = labyrintheNew[this.caseY][this.caseX+1];
+					break;
+				case 2:
+					destination = labyrintheNew[this.caseY+1][this.caseX];
+					break;
+				case 3:
+					destination = labyrintheNew[this.caseY][this.caseX-1];
+					break;
+			}
+        }
+        return false;*/
     }
 
 }
