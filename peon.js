@@ -1,6 +1,5 @@
 
-
-function Peon() {
+function Peon(sexe) {
 
 	this.x = 0;
 	this.y = 0;
@@ -8,20 +7,28 @@ function Peon() {
 	this.nextY = 0;
     this.caseX = 0;
     this.caseY = 0;
+	this.direction = 1;
     this.w = 20;
-	this.sexe = 'male';
+	this.vel = 2;
+	this.sexe = sexe;
     this.etat = 'static';
+	this.pixelParcouru = 0;
 
 	this.update = function() {
         if(this.etat=='move') {
+			this.pixelParcouru += this.vel;
             if(this.y > this.nextY){
-                this.y = this.y-2;
+				if(random(0,5)>2.5) this.createParticules(0);
+                this.y = this.y-this.vel;
             } else if(this.x < this.nextX) {
-                this.x = this.x+2;
+				if(random(0,5)>2.5) this.createParticules(1);
+                this.x = this.x+this.vel;
             } else if(this.y < this.nextY) {
-                this.y = this.y+2;
+				if(random(0,5)>2.5) this.createParticules(2);
+                this.y = this.y+this.vel;
             } else if(this.x > this.nextX) {
-                this.x = this.x-2;
+				if(random(0,5)>2.5) this.createParticules(3);
+                this.x = this.x-this.vel;
             } else {
                 this.etat='static';
             }
@@ -30,29 +37,18 @@ function Peon() {
 
 	this.display = function() {
         noStroke();
-        fill(255);
+		if(this.sexe=='male') {
+			fill(0,196,255);
+		} else if (this.sexe=='female') {
+			fill(255,0,129);
+		}
         push();
         rectMode(CENTER);
 		rect(this.x+caseTaille/2,this.y+caseTaille/2,this.w,this.w);
+        rectMode(CORNER);
 		imageMode(CENTER);
-		//image(cache, this.x+caseTaille/2,this.y+caseTaille/2);
+		image(cache, this.x+caseTaille/2,this.y+caseTaille/2);
         pop();
-        fill(255,0,0,150);
-        // haut
-        triangle(this.x + 5, this.y, this.x + caseTaille/2, this.y - 5, this.x + caseTaille - 5, this.y);
-        // droit
-        triangle(this.x + caseTaille+1, this.y + 5, this.x + caseTaille+6, this.y + caseTaille/2, this.x + caseTaille+1, this.y + caseTaille - 5);
-        // bas
-        triangle(this.x + 5, this.y + caseTaille +1, this.x + caseTaille/2, this.y + caseTaille+6, this.x + caseTaille, this.y + caseTaille+1);
-        // gauche
-        triangle(this.x, this.y + 5, this.x - 5, this.y + caseTaille/2, this.x, this.y + caseTaille);
-
-        // noFill();
-        // stroke(0,255,0);
-        // rect(this.x+caseTaille,this.y,caseTaille,caseTaille);
-        // rect(this.x-caseTaille,this.y,caseTaille,caseTaille);
-        // rect(this.x,this.y-caseTaille,caseTaille,caseTaille);
-        // rect(this.x,this.y+caseTaille,caseTaille,caseTaille);
 	};
 
     this.detectClick = function() {
@@ -93,9 +89,10 @@ function Peon() {
     };
 
     this.move = function(direction) {
-        if(this.detectWall(direction)==0) {
+		this.direction = direction;
+        if(this.detectWall(this.direction)===0) {
             this.etat = 'move';
-            switch (direction) {
+            switch (this.direction) {
                 case 0:
                     this.caseY--;
                     this.nextY -= caseTaille;
@@ -116,9 +113,33 @@ function Peon() {
         }
     };
 
-    this.detectWall = function(direction) {
+    this.detectWall = function() {
 		var destination = labyrinthe[this.caseY][this.caseX];
-		return correspondance[destination][direction];
+		switch (this.direction) {
+			case 0:
+				if(typeof labyrinthe[this.caseY-1]==='undefined')
+					return false;
+				break;
+			case 1:
+				if(typeof labyrinthe[this.caseY][this.caseX+1]==='undefined')
+					return false;
+				break;
+			case 2:
+				if(typeof labyrinthe[this.caseY+1]==='undefined')
+					return false;
+				break;
+			case 3:
+				if(typeof labyrinthe[this.caseY][this.caseX-1]==='undefined')
+					return false;
+				break;
+		}
+		return correspondance[destination][this.direction];
     }
+
+	this.createParticules = function() {
+		var particuleX = this.x + caseTaille/2 + random(-10,10);
+		var particuleY = this.y + caseTaille/2 + random(-10,10);
+		particules.push(new Particule(particuleX,particuleY,this.direction));
+	}
 
 }
