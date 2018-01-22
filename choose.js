@@ -1,5 +1,8 @@
+var chooseComplete = false;
 
 function chooseDisplay() {
+
+    pop();
 
     rectMode(CORNER);
     noStroke();
@@ -26,8 +29,7 @@ function chooseDisplay() {
     textAlign(CENTER);
     textSize(28);
     text('Choisissez un avatar',320,460);
-
-
+    push();
 }
 
 function chooseHover() {
@@ -50,9 +52,11 @@ function chooseHover() {
 function chooseClick() {
     if(chooseHover()==='male') {
         bob = new Peon('male');
-        init = true;
+        transition=255;
+        chooseComplete = true;
     } else if (chooseHover()==='female') {
         bob = new Peon('female');
-        init = true;
+        transition=255;
+        chooseComplete = true;
     }
 }

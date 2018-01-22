@@ -1,7 +1,8 @@
 var caseTaille = 50;
 var offset = 40;
 var bob;
-var init = false;
+var step = 0;
+var transition = 255;
 
 var cache;
 function preload() {
@@ -15,30 +16,23 @@ function setup() {
 }
 
 function draw() {
+    console.log(step);
     textFont('Open Sans');
     background(25);
-    if(init===false) {
+
+    if(step===1 || step===0) {
         // choix de l'avatar
         chooseDisplay();
 
-    } else if(init===true) {
+    } else if(step===2) {
         // labyrinthe et peon a afficher
     	if(bob.etat=='static') {
-    		bob.detectClick();
+    		bob.detection();
     	}
     	translate(offset,offset);
-    	for(var y=0; y < labyrinthe.length; y++) {
-    		for(var x=0; x < labyrinthe[y].length; x++) {
-    			stroke(255);
-    			noFill();
-    			drawLineNew(labyrinthe[y][x],x,y);
-                if(y==labyrinthe.length-1 && x==labyrinthe[y].length -1) {
-                    fill(255,255,255);
-                    rectMode(CORNER);
-                    rect(caseTaille*x+10,caseTaille*y+10,caseTaille-20,caseTaille-20);
-                }
-    		}
-    	}
+
+        labyrintheDisplay();
+
         for(var p = 0; p < particules.length; p++) {
             particules[p].update();
             particules[p].display();
@@ -53,10 +47,21 @@ function draw() {
     fill(255,0,0);
     // text('Pixels parcouru : '+bob.pixelParcouru+'px', 0, -20);
 
+
+
+    if(transition>0) {
+        fill(25,25,25,transition);
+        rect(0,0,width,height);
+        transition -= 3;
+    }
+    if(transition<=0 && chooseComplete===true) {
+        step = 2;
+    }
+
 }
 
 function mouseClicked() {
-    if(init===false) {
+    if(step===0) {
         chooseClick();
     }
 }

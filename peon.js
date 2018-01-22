@@ -47,11 +47,11 @@ function Peon(sexe) {
 		rect(this.x+caseTaille/2,this.y+caseTaille/2,this.w,this.w);
         rectMode(CORNER);
 		imageMode(CENTER);
-		image(cache, this.x+caseTaille/2,this.y+caseTaille/2);
+		//image(cache, this.x+caseTaille/2,this.y+caseTaille/2);
         pop();
 	};
 
-    this.detectClick = function() {
+    this.detection = function() {
         var infiniti = 800;
         // haut
         if(
@@ -111,6 +111,9 @@ function Peon(sexe) {
                     break;
             }
         }
+		if(this.caseX==labyrintheSortieX && this.caseY==labyrintheSortieY) {
+			this.grandSucces();
+		}
     };
 
     this.detectWall = function() {
@@ -140,6 +143,10 @@ function Peon(sexe) {
 		var particuleX = this.x + caseTaille/2 + random(-10,10);
 		var particuleY = this.y + caseTaille/2 + random(-10,10);
 		particules.push(new Particule(particuleX,particuleY,this.direction));
+	}
+
+	this.grandSucces = function() {
+		alert('Grand succès !');
 	}
 
 }

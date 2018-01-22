@@ -1,6 +1,6 @@
 
 var labyrinthe = [
-	['k','f','b','b','f','b','b','b','b','h'],
+	['k','f','b','f','f','b','b','b','b','h'],
 	['e','h','g','m','b','h','g','m','f','h'],
 	['l','g','j','f','d','g','g','k','f','i'],
 	['n','j','f','h','k','d','a','a','f','c'],
@@ -9,6 +9,9 @@ var labyrinthe = [
 	['g','j','f','f','i','k','h','k','f','h'],
 	['j','f','f','f','f','i','j','d','o','l'],
 ];
+
+var labyrintheSortieX = 3;
+var labyrintheSortieY = 0;
 
 var correspondance = {
 	'a': [0,0,0,0],
@@ -27,6 +30,23 @@ var correspondance = {
 	'n': [1,1,0,1],
 	'o': [1,1,1,0]
 };
+
+function labyrintheDisplay() {
+
+    for(var y=0; y < labyrinthe.length; y++) {
+        for(var x=0; x < labyrinthe[y].length; x++) {
+            stroke(255);
+            noFill();
+            drawLineNew(labyrinthe[y][x],x,y);
+            if(y==labyrintheSortieY && x==labyrintheSortieX) {
+                fill(255,255,255);
+                rectMode(CORNER);
+                rect(caseTaille*x+10,caseTaille*y+10,caseTaille-20,caseTaille-20);
+            }
+        }
+    }
+
+}
 
 function drawLineNew(type,x,y) {
 	strokeWeight(1);
