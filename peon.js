@@ -47,7 +47,7 @@ function Peon(sexe) {
 		rect(this.x+caseTaille/2,this.y+caseTaille/2,this.w,this.w);
         rectMode(CORNER);
 		imageMode(CENTER);
-		//image(cache, this.x+caseTaille/2,this.y+caseTaille/2);
+		image(cache, this.x+caseTaille/2,this.y+caseTaille/2);
         pop();
 	};
 
