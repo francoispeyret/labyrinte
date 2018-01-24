@@ -146,7 +146,7 @@ function Peon(sexe) {
 	}
 
 	this.grandSucces = function() {
-		alert('Grand succès !');
+		step=3;
 	}
 
 }

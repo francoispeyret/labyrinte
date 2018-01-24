@@ -52,11 +52,13 @@ function chooseHover() {
 function chooseClick() {
     if(chooseHover()==='male') {
         bob = new Peon('male');
-        transition=255;
-        chooseComplete = true;
+        transition=0;
+        transitionFade = 'out';
+        //chooseComplete = true;
     } else if (chooseHover()==='female') {
         bob = new Peon('female');
-        transition=255;
-        chooseComplete = true;
+        transition=0;
+        transitionFade = 'out';
+        //chooseComplete = true;
     }
 }

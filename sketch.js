@@ -1,8 +1,10 @@
 var caseTaille = 50;
 var offset = 40;
 var bob;
-var step = 0;
+var step = 1;
 var transition = 255;
+var transitionSpeed = 10;
+var transitionFade = 'in';
 
 var cache;
 function preload() {
@@ -16,7 +18,7 @@ function setup() {
 }
 
 function draw() {
-    console.log(step);
+
     textFont('Open Sans');
     background(25);
 
@@ -42,6 +44,10 @@ function draw() {
         }
     	bob.update();
     	bob.display();
+    } else if (step===3) {
+
+        successTitle();
+
     }
 
     fill(255,0,0);
@@ -49,19 +55,35 @@ function draw() {
 
 
 
-    if(transition>0) {
+    if(transition>0 && step==1 && transitionFade == 'in') {
         fill(25,25,25,transition);
         rect(0,0,width,height);
-        transition -= 3;
+        transition -= transitionSpeed;
     }
-    if(transition<=0 && chooseComplete===true) {
+    if(transition <= 0 && (step==1 || step==2) && transitionFade == 'in')
+        transitionFade = false;
+
+    if(transition<255 && step==1 && transitionFade == 'out') {
+        fill(25,25,25,transition);
+        rect(0,0,width,height);
+        transition += transitionSpeed;
+    }
+    if(transition>=255 && step==1 && transitionFade == 'out') {
+        chooseComplete = true;
+        transition = 255;
+        transitionFade = 'in';
+    }
+    if(transition<255 && chooseComplete==true && transitionFade == 'in') {
         step = 2;
+        fill(25,25,25,transition);
+        rect(0,0,width,height);
+        transition -= transitionSpeed;
     }
 
 }
 
 function mouseClicked() {
-    if(step===0) {
+    if(step<2) {
         chooseClick();
     }
 }
