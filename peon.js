@@ -16,7 +16,7 @@ function Peon(sexe) {
 
 	this.update = function() {
         if(this.etat=='move') {
-			this.pixelParcouru += this.vel;
+			this.pixelParcouru += Math.ceil(this.vel);
             if(this.y > this.nextY){
 				if(random(0,5)>2.5) this.createParticules(0);
                 this.y = this.y-this.vel;

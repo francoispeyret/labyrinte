@@ -2,7 +2,7 @@
 var titleSuccessSize = 0;
 var titleTransition = [0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1];
 var titleNumber = [0,0,0,0,0];
-var titleNumberMax = [2300,1200,120,70,50];
+var titleNumberMax = [2545,2600,120,70,50];
 
 function successTitle() {
     fill(255);
@@ -14,11 +14,11 @@ function successTitle() {
 
     if(titleTransition[1] < 22 && titleTransition[0] >= 42)
         titleTransition[1] += 1;
-    if(titleNumber[0] <= titleNumberMax[0])
-        titleNumber[0] += titleNumberMax[0]/100;
+    if(titleNumber[0] <= Math.ceil(bob.pixelParcouru))
+        titleNumber[0] += Math.ceil(bob.pixelParcouru)/100;
 
     textSize(22);
-    text(titleNumber[0]+' pixels parcourus', width/2, 160);
+    text(Math.ceil(titleNumber[0])+' pixels parcourus', width/2, 160);
 
     if(titleTransition[2] < 22 && titleTransition[1] >= 22)
         titleTransition[2] += 1;
@@ -59,9 +59,9 @@ function successTitle() {
         titleTransition[7] += 10;
 
     fill(255,255,255,titleTransition[7]);
-    text('201', width/2 - 17, 420);
+    text('201', width/2 - 16, 420);
     fill(255,0,0,titleTransition[7]);
-    text('9', width/2 + 28, 420);
+    text('9', width/2 + 30, 420);
 
 
 }

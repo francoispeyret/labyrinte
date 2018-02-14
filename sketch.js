@@ -53,14 +53,12 @@ function draw() {
     fill(255,0,0);
     // text('Pixels parcouru : '+bob.pixelParcouru+'px', 0, -20);
 
-
-
     if(transition>0 && step==1 && transitionFade == 'in') {
         fill(25,25,25,transition);
         rect(0,0,width,height);
         transition -= transitionSpeed;
     }
-    if(transition <= 0 && (step==1 || step==2) && transitionFade == 'in')
+    if(transition <= 0 && (step==1 || step==2) && transitionFade == 'in')
         transitionFade = false;
 
     if(transition<255 && step==1 && transitionFade == 'out') {

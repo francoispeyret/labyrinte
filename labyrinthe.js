@@ -7,7 +7,7 @@ var labyrinthe = [
 	['e','f','h','j','i','a','i','g','k','i'],
 	['g','n','j','f','b','f','f','i','j','o'],
 	['g','j','f','f','i','k','h','k','f','h'],
-	['j','f','f','f','f','i','j','d','o','l'],
+	['j','f','f','f','f','i','j','d','o','l']
 ];
 
 var labyrintheSortieX = 3;
